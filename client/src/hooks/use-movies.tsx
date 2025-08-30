@@ -52,3 +52,10 @@ export function useContinueWatching(userId: string) {
     enabled: !!userId,
   });
 }
+
+export function useMoviesByLanguage(language: string) {
+  return useQuery<Movie[]>({
+    queryKey: ["/api/movies/language", language],
+    enabled: !!language,
+  });
+}

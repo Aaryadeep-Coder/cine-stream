@@ -152,7 +152,7 @@ export default function VideoPlayer({ movie, onClose }: VideoPlayerProps) {
           onPause={() => setIsPlaying(false)}
           data-testid="video-element"
         >
-          <source src={movie.videoUrl} type="video/mp4" />
+          <source src={movie.videoUrl || undefined} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
         

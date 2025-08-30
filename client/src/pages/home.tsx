@@ -15,6 +15,7 @@ export default function Home() {
   const [isPlayerOpen, setIsPlayerOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedGenre, setSelectedGenre] = useState<string | null>(null);
+  const [selectedLanguage, setSelectedLanguage] = useState<string | null>(null);
   
   const isMobile = useIsMobile();
   
@@ -48,6 +49,12 @@ export default function Home() {
 
   const handleGenreFilter = (genre: string) => {
     setSelectedGenre(genre === selectedGenre ? null : genre);
+    setSelectedLanguage(null); // Clear language filter when genre is selected
+  };
+
+  const handleLanguageFilter = (language: string) => {
+    setSelectedLanguage(language === selectedLanguage ? null : language);
+    setSelectedGenre(null); // Clear genre filter when language is selected
   };
 
   if (isLoading) {
@@ -80,6 +87,8 @@ export default function Home() {
         searchQuery={searchQuery}
         selectedGenre={selectedGenre}
         onGenreFilter={handleGenreFilter}
+        selectedLanguage={selectedLanguage}
+        onLanguageFilter={handleLanguageFilter}
         data-testid="movie-catalog"
       />
 

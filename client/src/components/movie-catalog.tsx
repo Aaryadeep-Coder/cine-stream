@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import MovieCard from "./movie-card";
 import { Movie } from "@shared/schema";
-import { useSearchMovies, useMoviesByGenre } from "@/hooks/use-movies";
+import { useSearchMovies, useMoviesByGenre, useMoviesByLanguage } from "@/hooks/use-movies";
 import { Button } from "@/components/ui/button";
 
 interface MovieCatalogProps {
@@ -13,9 +13,12 @@ interface MovieCatalogProps {
   searchQuery: string;
   selectedGenre: string | null;
   onGenreFilter: (genre: string) => void;
+  selectedLanguage: string | null;
+  onLanguageFilter: (language: string) => void;
 }
 
 const genres = ["Action", "Comedy", "Drama", "Horror", "Sci-Fi", "Thriller", "Adventure", "Romance", "Fantasy"];
+const languages = ["English", "Hindi", "Mandarin"];
 
 export default function MovieCatalog({
   trendingMovies,
@@ -26,9 +29,12 @@ export default function MovieCatalog({
   searchQuery,
   selectedGenre,
   onGenreFilter,
+  selectedLanguage,
+  onLanguageFilter,
 }: MovieCatalogProps) {
   const { data: searchResults } = useSearchMovies(searchQuery);
   const { data: genreMovies } = useMoviesByGenre(selectedGenre || "");
+  const { data: languageMovies } = useMoviesByLanguage(selectedLanguage || "");
 
   const displayMovies = useMemo(() => {
     if (searchQuery && searchResults) {
@@ -37,10 +43,13 @@ export default function MovieCatalog({
     if (selectedGenre && genreMovies) {
       return genreMovies;
     }
+    if (selectedLanguage && languageMovies) {
+      return languageMovies;
+    }
     return null;
-  }, [searchQuery, searchResults, selectedGenre, genreMovies]);
+  }, [searchQuery, searchResults, selectedGenre, genreMovies, selectedLanguage, languageMovies]);
 
-  const shouldShowSections = !searchQuery && !selectedGenre;
+  const shouldShowSections = !searchQuery && !selectedGenre && !selectedLanguage;
 
   return (
     <main className="relative z-10 bg-background -mt-32 pt-32">
@@ -78,6 +87,25 @@ export default function MovieCatalog({
                   movie={movie}
                   onClick={onMovieSelect}
                   data-testid={`genre-result-${movie.id}`}
+                />
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* Language Filter Results */}
+        {selectedLanguage && displayMovies && (
+          <section>
+            <h3 className="text-2xl font-bold mb-6" data-testid="language-results-title">
+              {selectedLanguage} Movies
+            </h3>
+            <div className="movie-carousel grid gap-4" data-testid="language-results-grid">
+              {displayMovies.map((movie) => (
+                <MovieCard
+                  key={movie.id}
+                  movie={movie}
+                  onClick={onMovieSelect}
+                  data-testid={`language-result-${movie.id}`}
                 />
               ))}
             </div>
@@ -160,6 +188,30 @@ export default function MovieCatalog({
                     data-testid={`genre-filter-${genre.toLowerCase()}`}
                   >
                     {genre}
+                  </Button>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Languages Filter Section */}
+        {shouldShowSections && (
+          <section>
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-2xl font-bold" data-testid="browse-by-language-title">
+                Browse by Language
+              </h3>
+              <div className="flex space-x-2 overflow-x-auto scroll-container">
+                {languages.map((language) => (
+                  <Button
+                    key={language}
+                    variant={selectedLanguage === language ? "default" : "secondary"}
+                    className="whitespace-nowrap transition-colors"
+                    onClick={() => onLanguageFilter(language)}
+                    data-testid={`language-filter-${language.toLowerCase()}`}
+                  >
+                    {language}
                   </Button>
                 ))}
               </div>

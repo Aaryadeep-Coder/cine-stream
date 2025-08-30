@@ -9,6 +9,7 @@ export interface IStorage {
   getPopularMovies(): Promise<Movie[]>;
   searchMovies(query: string): Promise<Movie[]>;
   getMoviesByGenre(genre: string): Promise<Movie[]>;
+  getMoviesByLanguage(language: string): Promise<Movie[]>;
   createMovie(movie: InsertMovie): Promise<Movie>;
   getWatchProgress(movieId: string, userId: string): Promise<WatchProgress | undefined>;
   updateWatchProgress(progress: InsertWatchProgress): Promise<WatchProgress>;
@@ -37,7 +38,7 @@ export class MemStorage implements IStorage {
         imdbRating: "8.7",
         posterImage: "https://images.unsplash.com/photo-1635805737707-575885ab0820?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=600",
         backdropImage: "https://pixabay.com/get/gcffa9dfd9237680731fd641bf48d03dc6fb8a7da6c0521d487da31463bd20ccb906c5e92425d02ec10db4087b17a454f105b82e2685bfc089a1bb63ee8666b15_1280.jpg",
-        videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+        videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" as string,
         genres: ["Drama", "Biography", "History"],
         cast: "Claire Foy, Olivia Colman, Imelda Staunton",
         director: "Peter Morgan",
@@ -170,11 +171,83 @@ export class MemStorage implements IStorage {
         language: "English",
         isPopular: true,
       },
+      {
+        title: "Dangal",
+        description: "A biographical sports drama film based on the Phogat family, where a former wrestler trains his daughters to become world-class wrestlers.",
+        synopsis: "Former wrestler Mahavir Singh Phogat trains his daughters Geeta and Babita to become India's first world-class female wrestlers, overcoming societal barriers and achieving international success.",
+        year: 2016,
+        duration: "2h 41m",
+        rating: "PG",
+        imdbRating: "8.4",
+        posterImage: "https://images.unsplash.com/photo-1594736797933-d0edbe1ab183?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=600",
+        backdropImage: "https://images.unsplash.com/photo-1594736797933-d0edbe1ab183?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=675",
+        videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" as string,
+        genres: ["Biography", "Drama", "Sport"],
+        cast: "Aamir Khan, Fatima Sana Shaikh, Sanya Malhotra",
+        director: "Nitesh Tiwari",
+        language: "Hindi",
+        isTrending: true,
+        isPopular: true,
+      },
+      {
+        title: "3 Idiots",
+        description: "Two friends search for their long-lost companion who was once considered the third idiot in their engineering college.",
+        synopsis: "Rancho, Farhan, and Raju are engineering students who challenge the conventional education system and learn about friendship, love, and following one's passion.",
+        year: 2009,
+        duration: "2h 50m",
+        rating: "PG-13",
+        imdbRating: "8.4",
+        posterImage: "https://images.unsplash.com/photo-1517315003714-a071486bd9ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=600",
+        backdropImage: "https://images.unsplash.com/photo-1517315003714-a071486bd9ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=675",
+        videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/VolkswagenGTIReview.mp4" as string,
+        genres: ["Comedy", "Drama"],
+        cast: "Aamir Khan, Kareena Kapoor, R. Madhavan",
+        director: "Rajkumar Hirani",
+        language: "Hindi",
+        isTrending: true,
+        isPopular: true,
+      },
+      {
+        title: "Hero",
+        description: "A nameless warrior battles three deadly assassins to save a kingdom and win the heart of his beloved.",
+        synopsis: "In ancient China, a nameless warrior defeats three deadly assassins and earns an audience with the King of Qin, but his real motives may be more complex than they appear.",
+        year: 2002,
+        duration: "1h 39m",
+        rating: "PG-13",
+        imdbRating: "7.9",
+        posterImage: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=600",
+        backdropImage: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=675",
+        videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4" as string,
+        genres: ["Action", "Adventure", "Drama"],
+        cast: "Jet Li, Tony Leung Chiu-wai, Maggie Cheung",
+        director: "Zhang Yimou",
+        language: "Mandarin",
+        isTrending: true,
+        isPopular: true,
+      },
+      {
+        title: "Crouching Tiger, Hidden Dragon",
+        description: "A young Chinese warrior steals a sword from a famed swordsman and then escapes into a world of romantic adventure with a mysterious man.",
+        synopsis: "In 19th century China, a master warrior gives his sword to his beloved and retires, but the sword is stolen, leading to an epic adventure involving honor, love, and martial arts.",
+        year: 2000,
+        duration: "2h 0m",
+        rating: "PG-13",
+        imdbRating: "7.9",
+        posterImage: "https://images.unsplash.com/photo-1540979388789-6cee28a1cdc9?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=600",
+        backdropImage: "https://images.unsplash.com/photo-1540979388789-6cee28a1cdc9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=675",
+        videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4" as string,
+        genres: ["Action", "Adventure", "Drama"],
+        cast: "Chow Yun-fat, Michelle Yeoh, Zhang Ziyi",
+        director: "Ang Lee",
+        language: "Mandarin",
+        isTrending: true,
+        isPopular: true,
+      },
     ];
 
     sampleMovies.forEach(movie => {
       const id = randomUUID();
-      this.movies.set(id, { ...movie, id, createdAt: new Date() });
+      this.movies.set(id, { ...movie, id, createdAt: new Date(), videoUrl: movie.videoUrl || null });
     });
 
     // Add some sample watch progress
@@ -235,9 +308,15 @@ export class MemStorage implements IStorage {
     );
   }
 
+  async getMoviesByLanguage(language: string): Promise<Movie[]> {
+    return Array.from(this.movies.values()).filter(movie => 
+      movie.language.toLowerCase() === language.toLowerCase()
+    );
+  }
+
   async createMovie(movie: InsertMovie): Promise<Movie> {
     const id = randomUUID();
-    const newMovie: Movie = { ...movie, id, createdAt: new Date() };
+    const newMovie: Movie = { ...movie, id, createdAt: new Date(), videoUrl: movie.videoUrl || null };
     this.movies.set(id, newMovie);
     return newMovie;
   }

@@ -73,6 +73,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Get movies by language
+  app.get("/api/movies/language/:language", async (req, res) => {
+    try {
+      const { language } = req.params;
+      const movies = await storage.getMoviesByLanguage(language);
+      res.json(movies);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch movies by language" });
+    }
+  });
+
   // Get single movie
   app.get("/api/movies/:id", async (req, res) => {
     try {
