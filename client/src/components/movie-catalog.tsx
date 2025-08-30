@@ -218,6 +218,178 @@ export default function MovieCatalog({
             </div>
           </section>
         )}
+
+        {/* Sample Movies by Genre Sections */}
+        {shouldShowSections && (
+          <>
+            {/* Action Movies Section */}
+            <section>
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-2xl font-bold" data-testid="action-movies-title">
+                  Action Movies
+                </h3>
+                <Button
+                  variant="ghost"
+                  className="text-muted-foreground hover:text-primary"
+                  onClick={() => onGenreFilter("Action")}
+                  data-testid="view-all-action"
+                >
+                  View All
+                </Button>
+              </div>
+              <div className="movie-carousel grid gap-4" data-testid="action-movies-grid">
+                {trendingMovies.filter(movie => movie.genres.includes("Action")).slice(0, 6).map((movie) => (
+                  <MovieCard
+                    key={movie.id}
+                    movie={movie}
+                    onClick={onMovieSelect}
+                    data-testid={`action-movie-${movie.id}`}
+                  />
+                ))}
+              </div>
+            </section>
+
+            {/* Drama Movies Section */}
+            <section>
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-2xl font-bold" data-testid="drama-movies-title">
+                  Drama Movies
+                </h3>
+                <Button
+                  variant="ghost"
+                  className="text-muted-foreground hover:text-primary"
+                  onClick={() => onGenreFilter("Drama")}
+                  data-testid="view-all-drama"
+                >
+                  View All
+                </Button>
+              </div>
+              <div className="movie-carousel grid gap-4" data-testid="drama-movies-grid">
+                {popularMovies.filter(movie => movie.genres.includes("Drama")).slice(0, 6).map((movie) => (
+                  <MovieCard
+                    key={movie.id}
+                    movie={movie}
+                    onClick={onMovieSelect}
+                    data-testid={`drama-movie-${movie.id}`}
+                  />
+                ))}
+              </div>
+            </section>
+
+            {/* Comedy Movies Section */}
+            <section>
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-2xl font-bold" data-testid="comedy-movies-title">
+                  Comedy Movies
+                </h3>
+                <Button
+                  variant="ghost"
+                  className="text-muted-foreground hover:text-primary"
+                  onClick={() => onGenreFilter("Comedy")}
+                  data-testid="view-all-comedy"
+                >
+                  View All
+                </Button>
+              </div>
+              <div className="movie-carousel grid gap-4" data-testid="comedy-movies-grid">
+                {trendingMovies.filter(movie => movie.genres.includes("Comedy")).slice(0, 6).map((movie) => (
+                  <MovieCard
+                    key={movie.id}
+                    movie={movie}
+                    onClick={onMovieSelect}
+                    data-testid={`comedy-movie-${movie.id}`}
+                  />
+                ))}
+              </div>
+            </section>
+          </>
+        )}
+
+        {/* Sample Movies by Language Sections */}
+        {shouldShowSections && (
+          <>
+            {/* Hindi Movies Section */}
+            <section>
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-2xl font-bold" data-testid="hindi-movies-title">
+                  Hindi Movies
+                </h3>
+                <Button
+                  variant="ghost"
+                  className="text-muted-foreground hover:text-primary"
+                  onClick={() => onLanguageFilter("Hindi")}
+                  data-testid="view-all-hindi"
+                >
+                  View All
+                </Button>
+              </div>
+              <div className="movie-carousel grid gap-4" data-testid="hindi-movies-grid">
+                {trendingMovies.filter(movie => movie.language === "Hindi").slice(0, 6).map((movie) => (
+                  <MovieCard
+                    key={movie.id}
+                    movie={movie}
+                    onClick={onMovieSelect}
+                    data-testid={`hindi-movie-${movie.id}`}
+                  />
+                ))}
+              </div>
+            </section>
+
+            {/* English Movies Section */}
+            <section>
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-2xl font-bold" data-testid="english-movies-title">
+                  English Movies
+                </h3>
+                <Button
+                  variant="ghost"
+                  className="text-muted-foreground hover:text-primary"
+                  onClick={() => onLanguageFilter("English")}
+                  data-testid="view-all-english"
+                >
+                  View All
+                </Button>
+              </div>
+              <div className="movie-carousel grid gap-4" data-testid="english-movies-grid">
+                {popularMovies.filter(movie => movie.language === "English").slice(0, 6).map((movie) => (
+                  <MovieCard
+                    key={movie.id}
+                    movie={movie}
+                    onClick={onMovieSelect}
+                    data-testid={`english-movie-${movie.id}`}
+                  />
+                ))}
+              </div>
+            </section>
+
+            {/* Mandarin Movies Section */}
+            <section>
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-2xl font-bold" data-testid="mandarin-movies-title">
+                  Mandarin Movies
+                </h3>
+                <Button
+                  variant="ghost"
+                  className="text-muted-foreground hover:text-primary"
+                  onClick={() => onLanguageFilter("Mandarin")}
+                  data-testid="view-all-mandarin"
+                >
+                  View All
+                </Button>
+              </div>
+              <div className="movie-carousel grid gap-4" data-testid="mandarin-movies-grid">
+                {trendingMovies.filter(movie => movie.language === "Mandarin").slice(0, 6).map((movie) => (
+                  <MovieCard
+                    key={movie.id}
+                    movie={movie}
+                    onClick={onMovieSelect}
+                    data-testid={`mandarin-movie-${movie.id}`}
+                  />
+                ))}
+              </div>
+            </section>
+          </>
+        )}
       </div>
     </main>
   );
