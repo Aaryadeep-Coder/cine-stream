@@ -18,7 +18,7 @@ interface MovieCatalogProps {
 }
 
 const genres = ["Action", "Comedy", "Drama", "Horror", "Sci-Fi", "Thriller", "Adventure", "Romance", "Fantasy"];
-const languages = ["English", "Hindi", "Mandarin"];
+const languages = ["English", "Hindi", "Mandarin", "Korean", "Spanish"];
 
 export default function MovieCatalog({
   trendingMovies,
@@ -384,6 +384,60 @@ export default function MovieCatalog({
                     movie={movie}
                     onClick={onMovieSelect}
                     data-testid={`mandarin-movie-${movie.id}`}
+                  />
+                ))}
+              </div>
+            </section>
+
+            {/* Korean Movies Section */}
+            <section>
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-2xl font-bold" data-testid="korean-movies-title">
+                  Korean Movies & Shows
+                </h3>
+                <Button
+                  variant="ghost"
+                  className="text-muted-foreground hover:text-primary"
+                  onClick={() => onLanguageFilter("Korean")}
+                  data-testid="view-all-korean"
+                >
+                  View All
+                </Button>
+              </div>
+              <div className="movie-carousel grid gap-4" data-testid="korean-movies-grid">
+                {trendingMovies.filter(movie => movie.language === "Korean").slice(0, 6).map((movie) => (
+                  <MovieCard
+                    key={movie.id}
+                    movie={movie}
+                    onClick={onMovieSelect}
+                    data-testid={`korean-movie-${movie.id}`}
+                  />
+                ))}
+              </div>
+            </section>
+
+            {/* Spanish Movies Section */}
+            <section>
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-2xl font-bold" data-testid="spanish-movies-title">
+                  Spanish Movies & Shows
+                </h3>
+                <Button
+                  variant="ghost"
+                  className="text-muted-foreground hover:text-primary"
+                  onClick={() => onLanguageFilter("Spanish")}
+                  data-testid="view-all-spanish"
+                >
+                  View All
+                </Button>
+              </div>
+              <div className="movie-carousel grid gap-4" data-testid="spanish-movies-grid">
+                {trendingMovies.filter(movie => movie.language === "Spanish").slice(0, 6).map((movie) => (
+                  <MovieCard
+                    key={movie.id}
+                    movie={movie}
+                    onClick={onMovieSelect}
+                    data-testid={`spanish-movie-${movie.id}`}
                   />
                 ))}
               </div>
