@@ -195,30 +195,6 @@ export default function MovieCatalog({
           </section>
         )}
 
-        {/* Languages Filter Section */}
-        {shouldShowSections && (
-          <section>
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-2xl font-bold" data-testid="browse-by-language-title">
-                Browse by Language
-              </h3>
-              <div className="flex space-x-2 overflow-x-auto scroll-container">
-                {languages.map((language) => (
-                  <Button
-                    key={language}
-                    variant={selectedLanguage === language ? "default" : "secondary"}
-                    className="whitespace-nowrap transition-colors"
-                    onClick={() => onLanguageFilter(language)}
-                    data-testid={`language-filter-${language.toLowerCase()}`}
-                  >
-                    {language}
-                  </Button>
-                ))}
-              </div>
-            </div>
-          </section>
-        )}
-
         {/* Sample Movies by Genre Sections */}
         {shouldShowSections && (
           <>
@@ -303,6 +279,30 @@ export default function MovieCatalog({
               </div>
             </section>
           </>
+        )}
+
+        {/* Languages Filter Section */}
+        {shouldShowSections && (
+          <section>
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-2xl font-bold" data-testid="browse-by-language-title">
+                Browse by Language
+              </h3>
+              <div className="flex space-x-2 overflow-x-auto scroll-container">
+                {languages.map((language) => (
+                  <Button
+                    key={language}
+                    variant={selectedLanguage === language ? "default" : "secondary"}
+                    className="whitespace-nowrap transition-colors"
+                    onClick={() => onLanguageFilter(language)}
+                    data-testid={`language-filter-${language.toLowerCase()}`}
+                  >
+                    {language}
+                  </Button>
+                ))}
+              </div>
+            </div>
+          </section>
         )}
 
         {/* Sample Movies by Language Sections */}
